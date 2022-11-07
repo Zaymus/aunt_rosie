@@ -1,17 +1,21 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../../util/database");
 
-const section = sequelize.define("section", {
-	id: {
-		type: Sequelize.INTEGER,
-		autoIncrement: true,
-		allowNull: false,
-		primaryKey: true,
+const section = sequelize.define(
+	"section",
+	{
+		id: {
+			type: Sequelize.INTEGER,
+			autoIncrement: true,
+			allowNull: false,
+			primaryKey: true,
+		},
+		name: {
+			type: Sequelize.STRING,
+			allowNull: false,
+		},
 	},
-	name: {
-		type: Sequelize.STRING,
-		allowNull: false,
-	},
-});
+	{ timestamps: false }
+);
 
 module.exports = section;
