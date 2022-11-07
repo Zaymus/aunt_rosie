@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const sequelize = require("../util/database");
+const sequelize = require("../../util/database");
 
 const batch = sequelize.define("batch", {
 	id: {
