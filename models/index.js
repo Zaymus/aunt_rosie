@@ -4,4 +4,4 @@ const location = require("./location");
 const payments = require("./payments");
 const personnel = require("./personnel");
 
-module.exports = [inventory, invoice, location, payments, personnel];
+module.exports = { inventory, invoice, location, payments, personnel };
