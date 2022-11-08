@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const sequelize = require("./util/database");
 const middleware = require("./middleware");
-const env = require("./util/constants");
+const { env } = require("./util/constants");
 
 const app = express();
 const apiRouter = express.Router();
@@ -22,15 +22,6 @@ const {
 	payments,
 	personnel,
 } = require("./models");
-
-apiRouter.use(inventoryRouter);
-apiRouter.use(productRouter);
-apiRouter.use(staffRouter);
-apiRouter.use(shopRouter);
-apiRouter.use("/server", serverRouter);
-
-app.set("view engine", "ejs");
-app.set("views", "views");
 
 personnel.hourlyRate.hasMany(personnel.staff);
 personnel.staff.belongsTo(personnel.hourlyRate);
@@ -81,12 +72,23 @@ payments.financialTransaction.belongsTo(payments.payment);
 payments.financialTransaction.hasOne(payments.transactionType);
 payments.transactionType.belongsTo(payments.financialTransaction);
 
+apiRouter.use(inventoryRouter);
+apiRouter.use(productRouter);
+apiRouter.use("/staff", staffRouter);
+apiRouter.use(shopRouter);
+apiRouter.use("/server", serverRouter);
+
+app.set("view engine", "ejs");
+app.set("views", "views");
+
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 // app.use(middleware);
 app.use("/", apiRouter);
 
 sequelize
+	// .sync({ force: true })
 	.sync()
 	.then((result) => {
 		app.listen(env.PORT);
