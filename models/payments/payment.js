@@ -11,7 +11,7 @@ const payment = sequelize.define(
 			primaryKey: true,
 		},
 		amountDue: {
-			type: Sequelize.DECIMAL,
+			type: Sequelize.DECIMAL(10, 2),
 			allowNull: false,
 		},
 	},

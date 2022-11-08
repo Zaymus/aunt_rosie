@@ -11,7 +11,7 @@ const invoiceItem = sequelize.define(
 			primaryKey: true,
 		},
 		discount: {
-			type: Sequelize.DECIMAL,
+			type: Sequelize.DECIMAL(10, 2),
 		},
 	},
 	{ timestamps: false }

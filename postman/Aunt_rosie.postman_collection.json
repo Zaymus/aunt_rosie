@@ -7,6 +7,210 @@
 	},
 	"item": [
 		{
+			"name": "Staff",
+			"item": [
+				{
+					"name": "newStaff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"result has data\", () => {\r",
+									"    pm.expect(jsonData.result).to.be.an(\"object\").that.is.not.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"home_address\": \"123 Apple St.\",\r\n    \"phone_number\": \"111-222-3334\",\r\n    \"email_address\": \"john.doe@example.com\",\r\n    \"postal_code\": \"A1A 1A1\",\r\n    \"emp_type\": \"FT\",\r\n    \"hourly_rate\": 18.75\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/staff/new",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"staff",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getStaff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Staff was found\", () => {\r",
+									"    pm.expect(jsonData.staff).to.be.an(\"array\").that.is.not.empty;\r",
+									"});\r",
+									"\r",
+									"if(pm.expect(jsonData.staff).to.be.an(\"array\").that.is.not.empty) {\r",
+									"    pm.environment.set(\"new_staff_id\", jsonData.staff.at(-1).id);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/staff/all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"staff",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getStaffbyId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Staff should not be empty\", () => {\r",
+									"    pm.expect(jsonData.staff).to.be.an(\"object\").that.is.not.empty;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/staff/{{staff_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"staff",
+								"{{staff_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateStaff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Doe\",\r\n    \"home_address\": \"123 Apple St.\",\r\n    \"phone_number\": \"111-222-3334\",\r\n    \"email_address\": \"john.doe@example.com\",\r\n    \"postal_code\": \"A1A 1A1\",\r\n    \"emp_type\": \"FT\",\r\n    \"hourly_rate\": 25.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/staff/{{staff_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"staff",
+								"{{staff_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteStaff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/staff/{{new_staff_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"staff",
+								"{{new_staff_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "health",
 			"event": [
 				{
