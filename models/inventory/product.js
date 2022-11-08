@@ -19,15 +19,15 @@ const product = sequelize.define(
 			allowNull: false,
 		},
 		ingredients: {
-			type: Sequelize.STRING,
+			type: Sequelize.TEXT,
 			allowNull: false,
 		},
 		salePrice: {
-			type: Sequelize.DECIMAL,
+			type: Sequelize.DECIMAL(10, 2),
 			allowNull: false,
 		},
 		productCost: {
-			type: Sequelize.DECIMAL,
+			type: Sequelize.DECIMAL(10, 2),
 			allowNull: false,
 		},
 		storageType: {

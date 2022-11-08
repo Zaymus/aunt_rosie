@@ -11,8 +11,9 @@ const hourlyRate = sequelize.define(
 			primaryKey: true,
 		},
 		rate: {
-			type: Sequelize.DECIMAL,
+			type: Sequelize.DECIMAL(4, 2),
 			allowNull: false,
+			unique: true,
 		},
 	},
 	{ timestamps: false }

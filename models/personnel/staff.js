@@ -15,15 +15,15 @@ const staff = sequelize.define(
 			allowNull: false,
 		},
 		emp_type: {
-			type: Sequelize.STRING,
+			type: Sequelize.STRING(4),
 			allowNull: false,
 		},
 		home_address: {
 			type: Sequelize.STRING,
 			allowNull: false,
 		},
-		phone_Number: {
-			type: Sequelize.STRING,
+		phone_number: {
+			type: Sequelize.STRING(12),
 			allowNull: false,
 		},
 		email_address: {
@@ -31,11 +31,17 @@ const staff = sequelize.define(
 			allowNull: false,
 		},
 		postal_code: {
-			type: Sequelize.STRING,
+			type: Sequelize.STRING(7),
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{
+		timestamps: false,
+		references: {
+			model: "hourly_rates",
+			key: "id",
+		},
+	}
 );
 
 module.exports = staff;
