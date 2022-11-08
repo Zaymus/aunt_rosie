@@ -11,7 +11,7 @@ const apiRouter = express.Router();
 
 const inventoryRouter = require("./routes/inventory");
 const productRouter = require("./routes/product");
-const employeeRouter = require("./routes/employee");
+const staffRouter = require("./routes/staff");
 const shopRouter = require("./routes/shop");
 const serverRouter = require("./routes/server");
 
@@ -25,7 +25,7 @@ const {
 
 apiRouter.use(inventoryRouter);
 apiRouter.use(productRouter);
-apiRouter.use(employeeRouter);
+apiRouter.use(staffRouter);
 apiRouter.use(shopRouter);
 apiRouter.use("/server", serverRouter);
 
