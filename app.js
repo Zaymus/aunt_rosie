@@ -10,7 +10,6 @@ const app = express();
 const apiRouter = express.Router();
 
 const inventoryRouter = require("./routes/inventory");
-const productRouter = require("./routes/product");
 const staffRouter = require("./routes/staff");
 const shopRouter = require("./routes/shop");
 const serverRouter = require("./routes/server");
@@ -72,8 +71,7 @@ payments.financialTransaction.belongsTo(payments.payment);
 payments.financialTransaction.hasOne(payments.transactionType);
 payments.transactionType.belongsTo(payments.financialTransaction);
 
-apiRouter.use(inventoryRouter);
-apiRouter.use(productRouter);
+apiRouter.use("/inventory", inventoryRouter);
 apiRouter.use("/staff", staffRouter);
 apiRouter.use(shopRouter);
 apiRouter.use("/server", serverRouter);
