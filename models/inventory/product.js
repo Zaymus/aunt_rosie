@@ -10,7 +10,7 @@ const product = sequelize.define(
 			allowNull: false,
 			primaryKey: true,
 		},
-		shelfLife: {
+		shelf_life: {
 			type: Sequelize.INTEGER,
 			allowNull: false,
 		},
@@ -22,15 +22,15 @@ const product = sequelize.define(
 			type: Sequelize.TEXT,
 			allowNull: false,
 		},
-		salePrice: {
+		sale_price: {
 			type: Sequelize.DECIMAL(10, 2),
 			allowNull: false,
 		},
-		productCost: {
+		product_cost: {
 			type: Sequelize.DECIMAL(10, 2),
 			allowNull: false,
 		},
-		storageType: {
+		storage_type: {
 			type: Sequelize.STRING,
 			allowNull: false,
 		},
