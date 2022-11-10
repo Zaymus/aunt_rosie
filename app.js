@@ -34,8 +34,8 @@ invoice.invoiceItem.belongsTo(invoice.invoice);
 payments.transaction.hasMany(invoice.invoiceItem);
 invoice.invoiceItem.belongsTo(payments.transaction);
 
-payments.transaction.hasOne(inventory.inventory);
-inventory.inventory.belongsTo(payments.transaction);
+inventory.inventory.hasMany(payments.transaction);
+payments.transaction.belongsTo(inventory.inventory);
 
 location.shelf.hasMany(inventory.batch);
 inventory.batch.belongsTo(location.shelf);
