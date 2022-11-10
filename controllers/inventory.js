@@ -112,3 +112,51 @@ exports.putDeleteProduct = (req, res, next) => {
 			res.status(400).json({ err });
 		});
 };
+
+exports.getBatch = (req, res, next) => {
+	const productId = req.params.productId;
+
+	product
+		.findByPk(productId)
+		.then((product) => {
+			//update to send data to ejs file instead of json body response
+			res.json({ product: product.name, shelfLife: product.shelf_life });
+		})
+		.catch((err) => {
+			res.status(400).json({ err });
+		});
+};
+
+exports.postBatch = (req, res, next) => {
+	const productId = req.params.productId;
+	const shelfLife = req.body.shelf_life;
+	const quantity = req.body.quantity;
+	const location = req.body.shelf_id;
+	const bakeDate = getCurrentDate();
+	const expiryDate = addDays(shelfLife);
+
+	batch
+		.create({
+			shelfId: location,
+			bake_date: bakeDate,
+			expiry_date: expiryDate,
+		})
+		.then((batch) => {
+			inventory
+				.create({
+					quantity: quantity,
+					batchId: batch.id,
+					productId: productId,
+				})
+				.then((result) => {
+					res.json({ batch, result });
+				})
+				.catch((err) => {
+					res.status(400).json({ err });
+					batch.destroy();
+				});
+		})
+		.catch((err) => {
+			res.status(400).json({ err });
+		});
+};
