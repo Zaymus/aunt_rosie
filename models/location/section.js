@@ -15,7 +15,13 @@ const section = sequelize.define(
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{
+		timestamps: false,
+		references: {
+			model: "rooms",
+			key: "id",
+		},
+	}
 );
 
 module.exports = section;

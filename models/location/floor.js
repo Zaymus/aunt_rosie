@@ -15,7 +15,13 @@ const floor = sequelize.define(
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{
+		timestamps: false,
+		references: {
+			model: "buildings",
+			key: "id",
+		},
+	}
 );
 
 module.exports = floor;

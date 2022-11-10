@@ -15,7 +15,13 @@ const shelf = sequelize.define(
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{
+		timestamps: false,
+		references: {
+			model: "sections",
+			key: "id",
+		},
+	}
 );
 
 module.exports = shelf;

@@ -15,7 +15,13 @@ const building = sequelize.define(
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{
+		timestamps: false,
+		references: {
+			model: "locations",
+			key: "id",
+		},
+	}
 );
 
 module.exports = building;
