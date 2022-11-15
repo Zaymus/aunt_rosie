@@ -15,7 +15,17 @@ const inventory = sequelize.define(
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{
+		timestamps: false,
+		references: {
+			model: "batches",
+			key: "id",
+		},
+		references: {
+			model: "products",
+			key: "id",
+		},
+	}
 );
 
 module.exports = inventory;

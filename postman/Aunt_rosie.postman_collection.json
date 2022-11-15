@@ -144,6 +144,10 @@
 									"\r",
 									"pm.test(\"Status code is 200 OK\", () => {\r",
 									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Result should not be empty\", () => {\r",
+									"    pm.expect(jsonData.result).to.be.an(\"object\").that.is.not.empty;\r",
 									"})"
 								],
 								"type": "text/javascript"
@@ -203,6 +207,254 @@
 							"path": [
 								"staff",
 								"{{new_staff_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inventory",
+			"item": [
+				{
+					"name": "newProduct",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"result has data\", () => {\r",
+									"    pm.expect(jsonData.result).to.be.an(\"object\").that.is.not.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Apple Pie\",\r\n    \"shelf_life\": 7,\r\n    \"ingredients\": \"Sugar|Apples|butter|Cinnamon|Granulated Sugar|Flour|Salt|Water\",\r\n    \"sale_price\": 20,\r\n    \"product_cost\": 10,\r\n    \"storage_type\": \"Refrigerator\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/inventory/new",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProducts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Products were found\", () => {\r",
+									"    pm.expect(jsonData.products).to.be.an(\"array\").that.is.not.empty;\r",
+									"});\r",
+									"\r",
+									"if(pm.expect(jsonData.products).to.be.an(\"array\").that.is.not.empty) {\r",
+									"    pm.environment.set(\"new_product_id\", jsonData.products.at(-1).id);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Product should not be empty\", () => {\r",
+									"    pm.expect(jsonData.product).to.be.an(\"object\").that.is.not.empty;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/{{productId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Result should not be empty\", () => {\r",
+									"    pm.expect(jsonData.result).to.be.an(\"object\").that.is.not.empty;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Apple Pie Slice\",\r\n    \"shelf_life\": 7,\r\n    \"ingredients\": \"Sugar|Apples|butter|Cinnamon|Granulated Sugar|Flour|Salt|Water\",\r\n    \"sale_price\": 3,\r\n    \"product_cost\": 1.25,\r\n    \"storage_type\": \"Refrigerator\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/inventory/{{new_product_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"{{new_product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProduct",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/inventory/{{new_product_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"{{new_product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "newBatch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": 15,\r\n    \"shelf_life\": 7,\r\n    \"shelf_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/inventory/batch/{{productId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"inventory",
+								"batch",
+								"{{productId}}"
 							]
 						}
 					},

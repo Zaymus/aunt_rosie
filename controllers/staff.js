@@ -135,7 +135,7 @@ exports.patchEditStaff = (req, res, next) => {
 							employee
 								.save()
 								.then((result) => {
-									res.json({});
+									res.json({ result });
 								})
 								.catch((err) => {
 									res.status(400).json({ err });
@@ -165,7 +165,7 @@ exports.patchEditStaff = (req, res, next) => {
 					employee
 						.save()
 						.then((result) => {
-							res.json({});
+							res.json({ result });
 						})
 						.catch((err) => {
 							res.status(400).json({ err });

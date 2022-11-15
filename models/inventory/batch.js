@@ -10,16 +10,22 @@ const batch = sequelize.define(
 			allowNull: false,
 			primaryKey: true,
 		},
-		bakeDate: {
+		bake_date: {
 			type: Sequelize.DATE,
 			allowNull: false,
 		},
-		expiryDate: {
+		expiry_date: {
 			type: Sequelize.DATE,
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{
+		timestamps: false,
+		references: {
+			model: "shelves",
+			key: "id",
+		},
+	}
 );
 
 module.exports = batch;

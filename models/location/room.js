@@ -15,7 +15,13 @@ const room = sequelize.define(
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{
+		timestamps: false,
+		references: {
+			model: "floors",
+			key: "id",
+		},
+	}
 );
 
 module.exports = room;

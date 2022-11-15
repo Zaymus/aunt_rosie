@@ -10,7 +10,6 @@ const app = express();
 const apiRouter = express.Router();
 
 const inventoryRouter = require("./routes/inventory");
-const productRouter = require("./routes/product");
 const staffRouter = require("./routes/staff");
 const shopRouter = require("./routes/shop");
 const serverRouter = require("./routes/server");
@@ -35,8 +34,8 @@ invoice.invoiceItem.belongsTo(invoice.invoice);
 payments.transaction.hasMany(invoice.invoiceItem);
 invoice.invoiceItem.belongsTo(payments.transaction);
 
-payments.transaction.hasOne(inventory.inventory);
-inventory.inventory.belongsTo(payments.transaction);
+inventory.inventory.hasMany(payments.transaction);
+payments.transaction.belongsTo(inventory.inventory);
 
 location.shelf.hasMany(inventory.batch);
 inventory.batch.belongsTo(location.shelf);
@@ -72,8 +71,7 @@ payments.financialTransaction.belongsTo(payments.payment);
 payments.financialTransaction.hasOne(payments.transactionType);
 payments.transactionType.belongsTo(payments.financialTransaction);
 
-apiRouter.use(inventoryRouter);
-apiRouter.use(productRouter);
+apiRouter.use("/inventory", inventoryRouter);
 apiRouter.use("/staff", staffRouter);
 apiRouter.use(shopRouter);
 apiRouter.use("/server", serverRouter);
