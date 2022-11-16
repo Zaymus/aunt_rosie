@@ -1,0 +1,40 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../partials/navbar/vertical-nav.ejs') %>
+
+<div class="employee-data">
+  <h1 class="title">Create New Employee</h1>
+  
+  <form action="/staff/new" method="post">
+    <h2 id="name-title">Name</h2>
+    <div class="name-info">
+      <span><span class="bold">Name:</span><input type="text" class="frm-input" id="name" name="name" placeholder="John Doe" minlength="2" maxlength="255" required></span>
+    </div>
+
+    <h2>Contact</h2>
+    <div class="contact-info">
+      <span><span class="bold">Phone Number:</span> <input type="tel" class="frm-input" id="phone_number" name="phone_number" placeholder="111-222-3334" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required></span>
+      <span><span class="bold">Email Address:</span> <input type="email" class="frm-input" id="email_address" name="email_address" placeholder="test@example.com" required></span>
+    </div>
+
+    <h2>Employee Info</h2>
+    <div class="employee-info">
+      <span><span class="bold">Employee Type:</span> <input type="text" class="frm-input" id="emp_type" name="emp_type" placeholder="FT" minlength="2" maxlength="4" required></span>
+      <span><span class="bold">Hourly Rate:</span> $<input type="number" class="frm-input" id="hourly_rate" name="hourly_rate" placeholder="18.75" min="15" max="150" step="0.01" required></span>
+    </div>
+
+    <h2>Address</h2>
+    <div class="address-info">
+      <div><span class="bold">Home Address:</span>
+        <input type="text" class="frm-input" id="home_address" name="home_address" placeholder="123 Apple Street" required>
+        <input type="text" class="frm-input" id="province" name="province" placeholder="Ontario" required>
+        <input type="text" class="frm-input" id="country" name="country" placeholder="Canada" required>
+        <input type="text" class="frm-input" id="postal_code" name="postal_code" pattern="[a-zA-Z][0-9][a-zA-Z] [0-9][a-zA-Z][0-9]" placeholder="A1B 2C3" required>
+      </div>
+    </div>
+
+    <button type="submit">Create Employee</button>
+
+  </form>
+</div>
+
+<%- include('../includes/foot.ejs') %>

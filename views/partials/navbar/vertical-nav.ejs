@@ -1,0 +1,40 @@
+<nav class="vertical-nav">
+	<div class="logo--container flex center">
+	<a href="" class="flex center">
+		<img class="logo" src="../images/logo_svg.svg" />
+	</a>
+	</div>
+	<div class="nav">
+	<a href="/" class="flex center">
+		<div class="nav-btn flex center"
+			style="<%= selected === 'sale' ? 'background-color: var(--clr-nav-selected);' : '' %>">
+			<img class="nav-btn-img" src="../../images/icons/cart-plus-solid.svg" />
+		</div>
+	</a>
+	<a href="/inventory" class="flex center">
+		<div class="nav-btn flex center"
+		  style="<%= selected === 'inventory' ? 'background-color: var(--clr-nav-selected);' : '' %>">
+			<img
+				class="nav-btn-img"
+				src="../../images/icons/boxes-stacked-solid.svg"
+			/>
+		</div> </a
+	><a href="/staff/all" class="flex center">
+		<div class="nav-btn flex center"
+			style="<%= selected === 'staff' ? 'background-color: var(--clr-nav-selected);' : '' %>">
+			<img
+				class="nav-btn-img"
+				src="../../images/icons/people-group-solid.svg"
+			/>
+		</div> </a
+	><a href="" class="flex center">
+		<div class="nav-btn flex center"
+			style="<%= selected === 'reports' ? 'background-color: var(--clr-nav-selected);' : '' %>">
+			<img
+				class="nav-btn-img"
+				src="../../images/icons/file-lines-regular.svg"
+			/>
+		</div>
+	</a>
+	</div>
+</nav>

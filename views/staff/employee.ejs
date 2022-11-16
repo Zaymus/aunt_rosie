@@ -1,0 +1,36 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../partials/navbar/vertical-nav.ejs') %>
+
+<div class="employee-data">
+  <h1 class="title"><%= employee.dataValues.name %></h1>
+
+  <h2>Contact</h2>
+  <div class="contact-info">
+    <span><span class="bold">Phone Number:</span> <%= employee.dataValues.phone_number %></span>
+    <span><span class="bold">Email Address:</span> <%= employee.dataValues.email_address %></span>
+  </div>
+
+  <h2>Employee Info</h2>
+  <div class="employee-info">
+    <span><span class="bold">Employee Type:</span> <%= employee.dataValues.emp_type %></span>
+    <span><span class="bold">Hourly Rate:</span> $<%= rate.dataValues.rate %></span>
+  </div>
+
+  <h2>Address</h2>
+  <div class="address-info">
+    <span><span class="bold">Home Address:</span> 
+      <%= employee.dataValues.home_address %>, 
+      <%= employee.dataValues.province %>, 
+      <%= employee.dataValues.country %>, 
+      <%= employee.dataValues.postal_code %>
+    </span>
+  </div>
+
+  <a href="/staff/<%= employee.dataValues.id %>/edit">
+    <div class="edit-employee flex center">
+      <img src="../../../images/icons/user-pen-solid.svg">
+    </div>
+  </a>
+</div>
+
+<%- include('../includes/foot.ejs') %>

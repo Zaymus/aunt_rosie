@@ -30,6 +30,14 @@ const staff = sequelize.define(
 			type: Sequelize.STRING,
 			allowNull: false,
 		},
+		province: {
+			type: Sequelize.STRING(50),
+			allowNull: false,
+		},
+		country: {
+			type: Sequelize.STRING(50),
+			allowNull: false,
+		},
 		postal_code: {
 			type: Sequelize.STRING(7),
 			allowNull: false,
@@ -41,6 +49,7 @@ const staff = sequelize.define(
 			model: "hourly_rates",
 			key: "id",
 		},
+		initialAutoIncrement: 1000,
 	}
 );
 

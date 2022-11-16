@@ -1,10 +1,17 @@
+const axios = require("axios");
 const { staff, hourlyRate } = require("../models/personnel");
+const { env } = require("../util/constants");
 
 exports.getStaff = (req, res, next) => {
 	staff
 		.findAll()
 		.then((staff) => {
-			res.json({ staff });
+			// res.json({ staff });
+			res.render("staff/staff", {
+				pageTitle: "staff",
+				staff: staff,
+				selected: "staff"
+			});
 		})
 		.catch((err) => {
 			res.status(400).json({ err });
@@ -14,6 +21,8 @@ exports.getStaff = (req, res, next) => {
 exports.postNewStaff = (req, res, next) => {
 	const name = req.body.name;
 	const homeAddress = req.body.home_address;
+	const province = req.body.province;
+	const country = req.body.country;
 	const phoneNumber = req.body.phone_number;
 	const emailAddress = req.body.email_address;
 	const postalCode = req.body.postal_code;
@@ -23,7 +32,6 @@ exports.postNewStaff = (req, res, next) => {
 	hourlyRate
 		.findAll({ where: { rate: rate } })
 		.then((rates) => {
-			console.log(rates);
 			if (rates.length == 0) {
 				hourlyRate
 					.create({ rate: rate })
@@ -34,6 +42,8 @@ exports.postNewStaff = (req, res, next) => {
 								name: name,
 								emp_type: empType,
 								home_address: homeAddress,
+								province: province,
+								country: country,
 								phone_number: phoneNumber,
 								email_address: emailAddress,
 								postal_code: postalCode,
@@ -57,16 +67,18 @@ exports.postNewStaff = (req, res, next) => {
 						name: name,
 						emp_type: empType,
 						home_address: homeAddress,
+						province: province,
+						country: country,
 						phone_number: phoneNumber,
 						email_address: emailAddress,
 						postal_code: postalCode,
 						hourlyRateId: id,
 					})
 					.then((result) => {
-						res.json({ result });
+						const id = result.id;
+						res.redirect(`/staff/${id}`);
 					})
 					.catch((err) => {
-						result.destroy();
 						res.status(400).json({ err });
 					});
 			}
@@ -76,17 +88,83 @@ exports.postNewStaff = (req, res, next) => {
 		});
 };
 
+exports.getNewStaff = (req, res, next) => {
+	res.render("staff/new-employee", {
+		pageTitle: "Create Employee",
+		selected: "staff"
+	});
+}
+
 exports.getStaffbyId = (req, res, next) => {
 	const id = req.params.staffId;
 	staff
 		.findByPk(id)
 		.then((staff) => {
-			res.json({ staff });
+			hourlyRate.findByPk(staff.hourlyRateId)
+				.then((rate) => {
+					res.render("staff/employee", {
+						pageTitle: staff.name,
+						employee: staff,
+						rate: rate,
+						selected: "staff"
+					});
+				})
+				.catch((err) => {
+					res.status(400).json({err})
+				});
 		})
 		.catch((err) => {
 			res.status(400).json({ err });
 		});
 };
+
+exports.getEditStaff = (req, res, next) => {
+	const id = req.params.staffId;
+	staff
+		.findByPk(id)
+		.then((staff) => {
+			hourlyRate.findByPk(staff.hourlyRateId)
+				.then((rate) => {
+					res.render("staff/edit-employee", {
+						pageTitle: staff.name,
+						employee: staff,
+						rate: rate,
+						selected: "staff",
+						refresh: false
+					});
+				})
+				.catch((err) => {
+					res.status(400).json({err})
+				});
+		})
+		.catch((err) => {
+			res.status(400).json({ err });
+		});
+}
+
+exports.postEditStaff = (req, res, next) => {
+	const id = req.params.staffId;
+	staff.findByPk(id)
+		.then((staff) => {
+			axios.patch(`${env.BASE_URL}/staff/${id}`, {name: staff.name, ...req.body})
+			.then((result) => {
+				const data = result.data.result;
+				hourlyRate.findByPk(data.hourlyRateId)
+				.then((rate) => {
+					res.redirect(`/staff/${id}`);
+				})
+				.catch((err) => {
+					res.status(400).json({err})
+				});
+			})
+			.catch((err) => {
+				res.status(400).json({err});
+			});
+		})
+		.catch((err) => {
+		res.status(400).json({err})
+	});
+}
 
 exports.putDeleteStaff = (req, res, next) => {
 	const id = req.params.staffId;
@@ -161,7 +239,6 @@ exports.patchEditStaff = (req, res, next) => {
 						emp_type: empType,
 						hourlyRateId: rates[0].dataValues.id,
 					});
-
 					employee
 						.save()
 						.then((result) => {

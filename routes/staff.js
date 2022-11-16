@@ -6,7 +6,13 @@ router.get("/all", staffController.getStaff);
 
 router.post("/new", staffController.postNewStaff);
 
+router.get("/new", staffController.getNewStaff);
+
 router.get("/:staffId", staffController.getStaffbyId);
+
+router.get("/:staffId/edit", staffController.getEditStaff);
+
+router.post("/:staffId/edit", staffController.postEditStaff);
 
 router.put("/:staffId", staffController.putDeleteStaff);
 
