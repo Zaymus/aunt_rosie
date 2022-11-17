@@ -13,7 +13,7 @@
   <h2>Employee Info</h2>
   <div class="employee-info">
     <span><span class="bold">Employee Type:</span> <%= employee.dataValues.emp_type %></span>
-    <span><span class="bold">Hourly Rate:</span> $<%= rate.dataValues.rate %></span>
+    <span><span class="bold">Hourly Rate:</span> $<%= rate?.rate %></span>
   </div>
 
   <h2>Address</h2>
@@ -27,7 +27,7 @@
   </div>
 
   <a href="/staff/<%= employee.dataValues.id %>/edit">
-    <div class="edit-employee flex center">
+    <div class="edit-item flex center">
       <img src="../../../images/icons/user-pen-solid.svg">
     </div>
   </a>

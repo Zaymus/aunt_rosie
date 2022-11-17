@@ -47,10 +47,11 @@ exports.postNewStaff = (req, res, next) => {
 								phone_number: phoneNumber,
 								email_address: emailAddress,
 								postal_code: postalCode,
-								hourlyRateId: id,
+								rate_id: id,
 							})
 							.then((result) => {
-								res.json({ result });
+								const id = result.id;
+								res.redirect(`/staff/${id}`);
 							})
 							.catch((err) => {
 								result.destroy();
@@ -72,7 +73,7 @@ exports.postNewStaff = (req, res, next) => {
 						phone_number: phoneNumber,
 						email_address: emailAddress,
 						postal_code: postalCode,
-						hourlyRateId: id,
+						rate_id: id,
 					})
 					.then((result) => {
 						const id = result.id;
@@ -100,7 +101,7 @@ exports.getStaffbyId = (req, res, next) => {
 	staff
 		.findByPk(id)
 		.then((staff) => {
-			hourlyRate.findByPk(staff.hourlyRateId)
+			hourlyRate.findByPk(staff.rate_id)
 				.then((rate) => {
 					res.render("staff/employee", {
 						pageTitle: staff.name,
@@ -123,7 +124,7 @@ exports.getEditStaff = (req, res, next) => {
 	staff
 		.findByPk(id)
 		.then((staff) => {
-			hourlyRate.findByPk(staff.hourlyRateId)
+			hourlyRate.findByPk(staff.rate_id)
 				.then((rate) => {
 					res.render("staff/edit-employee", {
 						pageTitle: staff.name,
@@ -149,7 +150,7 @@ exports.postEditStaff = (req, res, next) => {
 			axios.patch(`${env.BASE_URL}/staff/${id}`, {name: staff.name, ...req.body})
 			.then((result) => {
 				const data = result.data.result;
-				hourlyRate.findByPk(data.hourlyRateId)
+				hourlyRate.findByPk(data.rate_id)
 				.then((rate) => {
 					res.redirect(`/staff/${id}`);
 				})
@@ -207,7 +208,7 @@ exports.patchEditStaff = (req, res, next) => {
 								email_address: emailAddress,
 								postal_code: postalCode,
 								emp_type: empType,
-								hourlyRateId: rateId,
+								rate_id: rateId,
 							});
 
 							employee
@@ -237,7 +238,7 @@ exports.patchEditStaff = (req, res, next) => {
 						email_address: emailAddress,
 						postal_code: postalCode,
 						emp_type: empType,
-						hourlyRateId: rates[0].dataValues.id,
+						rate_id: rates[0].dataValues.id,
 					});
 					employee
 						.save()

@@ -14,7 +14,7 @@
   <h2>Employee Info</h2>
   <div class="employee-info">
     <span><span class="bold">Employee Type:</span> <input type="text" class="frm-input" id="emp_type" name="emp_type" value="<%= employee.dataValues.emp_type %>" placeholder="FT" minlength="2" maxlength="4" required></span>
-    <span><span class="bold">Hourly Rate:</span> $<input type="number" class="frm-input" id="hourly_rate" name="hourly_rate" value="<%= rate.dataValues.rate %>" placeholder="18.75" min="15" max="150" step="0.01" required></span>
+    <span><span class="bold">Hourly Rate:</span> $<input type="number" class="frm-input" id="hourly_rate" name="hourly_rate" value="<%= rate?.dataValues.rate %>" placeholder="18.75" min="15" max="150" step="0.01" required></span>
   </div>
 
   <h2>Address</h2>
