@@ -1,3 +1,4 @@
+const procedures = require("../util/procedures");
 const { product, batch, inventory } = require("../models/inventory");
 const {
 	location,
@@ -8,6 +9,7 @@ const {
 	shelf,
 } = require("../models/location");
 const { getCurrentDate, addDays } = require("../util/date");
+const sequelize = require("../util/database");
 
 exports.postNewProduct = (req, res, next) => {
 	const name = req.body.name;
@@ -35,27 +37,44 @@ exports.postNewProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-	product
-		.findAll()
-		.then((products) => {
-			res.json({ products });
+
+	procedures.getProductData
+		.then(result => {
+			res.render("product/products", {
+				pageTitle: "Inventory",
+				selected: "inventory",
+				products: result
+			})
 		})
-		.catch((err) => {
-			res.status(400).json({ err });
+		.catch(err => {
+			res.status(400).json({err});
 		});
 };
 
 exports.getProductById = (req, res, next) => {
 	const id = req.params.productId;
 
-	product
-		.findByPk(id)
-		.then((product) => {
-			res.json({ product });
+	sequelize
+		.query('CALL getProductDataFromId(:param_id)',
+    	{replacements: {param_id: id}})
+		.then(result => {
+			res.render('product/product', {
+				pageTitle: result[0].product_name,
+				selected: 'inventory',
+				product: result[0]
+			});
 		})
-		.catch((err) => {
-			res.status(400).json({ err });
-		});
+		.catch(err => {
+			res.status(400).json({err});
+		})
+	// product
+	// 	.findByPk(id)
+	// 	.then((product) => {
+	// 		res.json({ product });
+	// 	})
+	// 	.catch((err) => {
+	// 		res.status(400).json({ err });
+	// 	});
 };
 
 exports.patchUpdateProduct = (req, res, next) => {
