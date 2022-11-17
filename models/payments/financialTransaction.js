@@ -15,7 +15,10 @@ const financialTransaction = sequelize.define(
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{ 
+		timestamps: false,
+		tableName: "financial_transaction"
+	 }
 );
 
 module.exports = financialTransaction;

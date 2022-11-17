@@ -19,7 +19,10 @@ const transaction = sequelize.define(
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{ 
+		timestamps: false,
+		tableName: "transaction"
+	 }
 );
 
 module.exports = transaction;

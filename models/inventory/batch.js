@@ -4,7 +4,7 @@ const sequelize = require("../../util/database");
 const batch = sequelize.define(
 	"batch",
 	{
-		id: {
+		batch_id: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			allowNull: false,
@@ -18,13 +18,14 @@ const batch = sequelize.define(
 			type: Sequelize.DATE,
 			allowNull: false,
 		},
+		quantity: {
+			type: Sequelize.INTEGER,
+			allowNull: false,
+		}
 	},
 	{
 		timestamps: false,
-		references: {
-			model: "shelves",
-			key: "id",
-		},
+		tableName: "batch"
 	}
 );
 

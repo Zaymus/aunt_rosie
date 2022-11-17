@@ -15,7 +15,10 @@ const payment = sequelize.define(
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{ 
+		timestamps: false,
+		tableName: "payment"
+	 }
 );
 
 module.exports = payment;

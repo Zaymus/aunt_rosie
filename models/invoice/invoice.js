@@ -19,7 +19,10 @@ const invoice = sequelize.define(
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{ 
+		timestamps: false,
+		tableName: "invoice"
+	 }
 );
 
 module.exports = invoice;

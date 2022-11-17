@@ -4,23 +4,20 @@ const sequelize = require("../../util/database");
 const floor = sequelize.define(
 	"floor",
 	{
-		id: {
+		floor_id: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			allowNull: false,
 			primaryKey: true,
 		},
-		floorNum: {
+		floor_num: {
 			type: Sequelize.INTEGER,
 			allowNull: false,
 		},
 	},
 	{
 		timestamps: false,
-		references: {
-			model: "buildings",
-			key: "id",
-		},
+		tableName: "floor"
 	}
 );
 
