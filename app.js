@@ -22,11 +22,11 @@ const {
 	personnel,
 } = require("./models");
 
-personnel.hourlyRate.hasMany(personnel.staff);
-personnel.staff.belongsTo(personnel.hourlyRate);
+personnel.hourlyRate.hasMany(personnel.staff, {foreignKey: 'rate_id'});
+personnel.staff.belongsTo(personnel.hourlyRate, {foreignKey: 'rate_id'});
 
-personnel.staff.hasMany(invoice.invoice);
-invoice.invoice.belongsTo(personnel.staff);
+personnel.staff.hasMany(invoice.invoice, {foreignKey: 'staff_id'});
+invoice.invoice.belongsTo(personnel.staff, {foreignKey: 'staff_id'});
 
 invoice.invoice.hasMany(invoice.invoiceItem);
 invoice.invoiceItem.belongsTo(invoice.invoice);
@@ -34,33 +34,35 @@ invoice.invoiceItem.belongsTo(invoice.invoice);
 payments.transaction.hasMany(invoice.invoiceItem);
 invoice.invoiceItem.belongsTo(payments.transaction);
 
-inventory.inventory.hasMany(payments.transaction);
-payments.transaction.belongsTo(inventory.inventory);
+inventory.inventory.hasMany(payments.transaction, {foreignKey: 'inventory_id'});
+payments.transaction.belongsTo(inventory.inventory, {foreignKey: 'inventory_id'});
 
-location.shelf.hasMany(inventory.batch);
-inventory.batch.belongsTo(location.shelf);
+location.shelf.hasMany(inventory.batch, {foreignKey: 'batch_location'});
+inventory.batch.belongsTo(location.shelf, {foreignKey: 'batch_location'});
 
 inventory.batch.belongsToMany(inventory.product, {
 	through: inventory.inventory,
+	foreignKey: 'product_id'
 });
 inventory.product.belongsToMany(inventory.batch, {
 	through: inventory.inventory,
+	foreignKey: 'batch_id'
 });
 
-location.location.hasMany(location.building);
-location.building.belongsTo(location.location);
+location.location.hasMany(location.building, {foreignKey: 'location_id'});
+location.building.belongsTo(location.location, {foreignKey: 'location_id'});
 
-location.building.hasMany(location.floor);
-location.floor.belongsTo(location.building);
+location.building.hasMany(location.floor, {foreignKey: 'building_id'});
+location.floor.belongsTo(location.building, {foreignKey: 'building_id'});
 
-location.floor.hasMany(location.room);
-location.room.belongsTo(location.floor);
+location.floor.hasMany(location.room, {foreignKey: 'floor_id'});
+location.room.belongsTo(location.floor, {foreignKey: 'floor_id'});
 
-location.room.hasMany(location.section);
-location.section.belongsTo(location.room);
+location.room.hasMany(location.section, {foreignKey: 'room_id'});
+location.section.belongsTo(location.room, {foreignKey: 'room_id'});
 
-location.section.hasMany(location.shelf);
-location.shelf.belongsTo(location.section);
+location.section.hasMany(location.shelf, {foreignKey: 'section_id'});
+location.shelf.belongsTo(location.section, {foreignKey: 'section_id'});
 
 invoice.invoice.hasMany(payments.payment);
 payments.payment.belongsTo(invoice.invoice);
