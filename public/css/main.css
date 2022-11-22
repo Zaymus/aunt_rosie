@@ -250,3 +250,14 @@ h2 {
   width: auto;
   margin-left: 5px;
 }
+
+.edit-ingredients {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}

@@ -1,0 +1,41 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../partials/navbar/vertical-nav.ejs') %>
+
+<div class="data">
+  <h1 class="title"><%= product.product_name %></h1>
+  <form action="/inventory/<%= product.product_id %>/edit" method="post">
+  <h2>Details</h2>
+  <div class="details-info">
+    <div class="edit-ingredients">
+      <span class="bold">Ingredients:</span>
+      <textarea name="ingredients" cols="30" rows="10" spellcheck="false" required><%= product.ingredients.split('|').join(","); %></textarea>
+    </div>
+    <span><span class="bold">Shelf Life:</span>
+    <input type="number" min="1" max="1000" step="1" name="shelf_life" value="<%= product.shelf_life %>" placeholder="7" required /></span>
+  </div>
+
+  <h2>Pricing</h2>
+  <div class="details-info">
+    <span><span class="bold">Product Cost: </span>
+    $<input type="number" min="0.01" max="1000" step="0.01" name="product_cost" value="<%= product.product_cost %>" placeholder="5.99" required />
+    </span>
+    <span><span class="bold">Sale Price: </span>$<input type="number" min="0.01" max="1000" step="0.01" name="sale_price" value="<%= product.sale_price %>" placeholder="2.50" required /></span>
+  </div>
+
+  <h2>Location</h2>
+  <div class="location-info">
+    <select name="shelf">
+      <% locations.forEach(location => { %>
+        <option value="<%= location.dataValues.shelf_id %>">
+          <%= location.dataValues.shelf_name %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+
+  <button type="submit">Save Changes</button>
+
+  </form>
+</div>
+
+<%- include('../includes/foot.ejs') %>
