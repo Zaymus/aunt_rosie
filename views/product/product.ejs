@@ -1,0 +1,49 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../partials/navbar/vertical-nav.ejs') %>
+
+<div class="data">
+  <h1 class="title"><%= product.product_name %></h1>
+
+  <h2>Details</h2>
+  <div class="details-info">
+    <div>
+      <span class="bold">Ingredients:</span>
+      <ul class="ingredients">
+        <% const ingredients = product.ingredients.split('|'); %>
+        <% ingredients.forEach(ingredient => {%>
+          <li class="ingredient">
+            <%= ingredient %>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+    <span><span class="bold">Shelf Life:</span> <%= product.shelf_life %></span>
+  </div>
+
+  <h2>Pricing</h2>
+  <div class="details-info">
+    <span><span class="bold">Product Cost: </span>$<%= product.product_cost %></span>
+    <span><span class="bold">Sale Price: </span>$<%= product.sale_price %></span>
+  </div>
+
+
+  <div class="button-list">
+    <a href="/inventory/batch/<%= product.product_id %>">
+      <div class="product-btn flex center">
+        <img src="/images/icons/cubes-stacked-solid.svg">
+      </div>
+    </a>
+    <a href="">
+      <div class="product-btn flex center">
+        <img src="/images/icons/print-solid.svg">
+      </div>
+    </a>
+    <a href="/inventory/<%= product.product_id %>/edit">
+      <div class="product-btn flex center">
+        <img src="/images/icons/pen-to-square-solid.svg">
+      </div>
+    </a>
+  </div>
+</div>
+
+<%- include('../includes/foot.ejs') %>

@@ -45,11 +45,8 @@ const staff = sequelize.define(
 	},
 	{
 		timestamps: false,
-		references: {
-			model: "hourly_rates",
-			key: "id",
-		},
 		initialAutoIncrement: 1000,
+		tableName: "staff"
 	}
 );
 

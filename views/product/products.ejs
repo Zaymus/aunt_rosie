@@ -1,0 +1,36 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../partials/navbar/vertical-nav.ejs') %>
+
+<div class="content">
+  <div class="header flex right">
+    <a href="/inventory/new">
+    <div class="add-btn flex center">
+      <img src="/images/icons/plus-solid.svg">
+    </div>
+  </a>
+  </div>
+  <div class="data">
+    <% if (products.length > 0) { %>
+      <% products.forEach((prod) => { %>
+        <div class="row product">
+          <span class="name"><%= prod.product_name %></span>
+          <span class="location">
+            <span><span class="bold">Floor:</span><%= `${prod.floor_num}` %></span>
+            <span><span class="bold">Room:</span><%= `${prod.room_name}` %></span>
+            <span><span class="bold">Section:</span><%= `${prod.section_name}` %></span>
+            <span><span class="bold">Shelf:</span><%= `${prod.shelf_name}` %></span>
+          </span>
+          <span class="quantity"><%= prod.quantity %></span>
+          <a href="/inventory/<%= prod.product_id %>">
+            <div class="details-btn flex center">
+              <img src="/images/icons/arrow-right-solid.svg">
+            </div>
+          </a>
+        </div>
+      <% }); %>
+    <% } %>
+  </div>
+</div>
+
+
+<%- include('../includes/foot.ejs') %>

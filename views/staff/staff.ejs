@@ -5,20 +5,20 @@
   <div class="header flex right">
     <a href="/staff/new">
     <div class="add-btn flex center">
-      <img src="../../../images/icons/plus-solid.svg">
+      <img src="/images/icons/plus-solid.svg">
     </div>
   </a>
   </div>
   <div class="data">
     <% if (staff.length > 0) { %>
       <% staff.forEach((emp) => { %>
-        <div class="employee">
+        <div class="row employee">
           <span class="name"><%= emp.dataValues.name %></span>
           <span class="phone"><%= emp.dataValues.phone_number %></span>
           <span class="email"><%= emp.dataValues.email_address %></span>
           <a href="/staff/<%= emp.dataValues.id %>">
             <div class="details-btn flex center">
-              <img src="../../../images/icons/arrow-right-solid.svg">
+              <img src="/images/icons/arrow-right-solid.svg">
             </div>
           </a>
         </div>

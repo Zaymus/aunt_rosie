@@ -1,0 +1,56 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../partials/navbar/vertical-nav.ejs') %>
+
+<div class="employee-data">
+  <h1 class="title">Create New Product</h1>
+
+<div class="data">
+  <form action="/inventory/new" method="post">
+  <h2 id="name-title">Product Name</h2>
+  <div class="name-info">
+    <span><span class="bold">Name:</span><input type="text" class="frm-input" id="name" name="product_name" placeholder="1kg Apple Pie - Frozen" minlength="2" maxlength="255" required></span>
+  </div>
+
+  <h2>Details</h2>
+  <div class="details-info">
+    <div class="edit-ingredients">
+      <span class="bold">Ingredients:</span>
+      <textarea name="ingredients" cols="30" rows="10" spellcheck="false" placeholder="Ingredient list separated by commas(,) please do not add spaces between commas"required></textarea>
+    </div>
+    <span><span class="bold">Shelf Life:</span>
+    <input type="number" min="1" max="1000" step="1" name="shelf_life"placeholder="7" required /></span>
+  </div>
+
+  <h2>Pricing</h2>
+  <div class="details-info">
+    <span><span class="bold">Product Cost: </span>
+    $<input type="number" min="0.01" max="1000" step="0.01" name="product_cost" placeholder="5.99" required />
+    </span>
+    <span><span class="bold">Sale Price: </span>$<input type="number" min="0.01" max="1000" step="0.01" name="sale_price" placeholder="2.50" required /></span>
+  </div>
+
+  <h2>Location</h2>
+  <div class="location-info">
+    <select name="shelf">
+      <% locations.forEach(location => { %>
+        <option value="<%= location.dataValues.shelf_id %>">
+          <%= location.dataValues.shelf_name %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+
+  <h2>Batch Details</h2>
+  <div class="batch-details">
+    <span>
+      <span class="bold">Quantity: </span>
+      <input type="number" name="quantity" placeholder="13" min="1" max="300" step="1" required />
+    </span>
+  </div>
+
+  <button type="submit">Create Product</button>
+
+  </form>
+</div>
+
+<%- include('../includes/foot.ejs') %>

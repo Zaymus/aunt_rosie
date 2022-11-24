@@ -4,23 +4,20 @@ const sequelize = require("../../util/database");
 const building = sequelize.define(
 	"building",
 	{
-		id: {
+		building_id: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			allowNull: false,
 			primaryKey: true,
 		},
-		Name: {
+		building_name: {
 			type: Sequelize.STRING,
 			allowNull: false,
 		},
 	},
 	{
 		timestamps: false,
-		references: {
-			model: "locations",
-			key: "id",
-		},
+		tableName: "building"
 	}
 );
 

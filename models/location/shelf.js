@@ -4,23 +4,20 @@ const sequelize = require("../../util/database");
 const shelf = sequelize.define(
 	"shelf",
 	{
-		id: {
+		shelf_id: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			allowNull: false,
 			primaryKey: true,
 		},
-		Name: {
+		shelf_name: {
 			type: Sequelize.STRING,
 			allowNull: false,
 		},
 	},
 	{
 		timestamps: false,
-		references: {
-			model: "sections",
-			key: "id",
-		},
+		tableName: "shelf"
 	}
 );
 

@@ -16,7 +16,10 @@ const hourlyRate = sequelize.define(
 			unique: true,
 		},
 	},
-	{ timestamps: false }
+	{ 
+		timestamps: false,
+		tableName: "hourly_rate"
+	 }
 );
 
 module.exports = hourlyRate;

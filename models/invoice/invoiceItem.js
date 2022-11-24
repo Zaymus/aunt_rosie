@@ -14,7 +14,10 @@ const invoiceItem = sequelize.define(
 			type: Sequelize.DECIMAL(10, 2),
 		},
 	},
-	{ timestamps: false }
+	{ 
+		timestamps: false,
+		tableName: "invoice_items"
+	}
 );
 
 module.exports = invoiceItem;

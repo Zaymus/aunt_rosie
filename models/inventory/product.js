@@ -4,7 +4,7 @@ const sequelize = require("../../util/database");
 const product = sequelize.define(
 	"product",
 	{
-		id: {
+		product_id: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			allowNull: false,
@@ -14,7 +14,7 @@ const product = sequelize.define(
 			type: Sequelize.INTEGER,
 			allowNull: false,
 		},
-		name: {
+		product_name: {
 			type: Sequelize.STRING,
 			allowNull: false,
 		},
@@ -30,12 +30,11 @@ const product = sequelize.define(
 			type: Sequelize.DECIMAL(10, 2),
 			allowNull: false,
 		},
-		storage_type: {
-			type: Sequelize.STRING,
-			allowNull: false,
-		},
 	},
-	{ timestamps: false }
+	{ 
+		timestamps: false,
+		tableName: "products"
+	 }
 );
 
 module.exports = product;

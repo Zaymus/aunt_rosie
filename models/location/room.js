@@ -4,23 +4,20 @@ const sequelize = require("../../util/database");
 const room = sequelize.define(
 	"room",
 	{
-		id: {
+		room_id: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			allowNull: false,
 			primaryKey: true,
 		},
-		name: {
+		room_name: {
 			type: Sequelize.STRING,
 			allowNull: false,
 		},
 	},
 	{
 		timestamps: false,
-		references: {
-			model: "floors",
-			key: "id",
-		},
+		tableName: "room"
 	}
 );
 

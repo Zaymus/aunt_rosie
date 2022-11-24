@@ -4,7 +4,7 @@ const sequelize = require("../../util/database");
 const location = sequelize.define(
 	"location",
 	{
-		id: {
+		location_id: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			allowNull: false,
@@ -23,7 +23,10 @@ const location = sequelize.define(
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{ 
+		timestamps: false,
+		tableName: "location"
+	 }
 );
 
 module.exports = location;

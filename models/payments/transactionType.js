@@ -15,7 +15,10 @@ const transactionType = sequelize.define(
 			allowNull: false,
 		},
 	},
-	{ timestamps: false }
+	{ 
+		timestamps: false,
+		tableName: "transaction_type"
+	 }
 );
 
 module.exports = transactionType;
