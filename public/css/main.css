@@ -230,7 +230,7 @@ h2 {
   right: 0;
   bottom: 0;
   width: 80px;
-  height: 170px;
+  height: 240px;
   margin-right: 5vw;
   margin-bottom: 5vw;
   display: flex;
@@ -259,5 +259,13 @@ h2 {
 .location-info {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.batch-details {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+  padding-left: 10px;
   margin-bottom: 25px;
 }

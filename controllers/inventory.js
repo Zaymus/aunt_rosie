@@ -33,6 +33,15 @@ exports.postNewProduct = (req, res, next) => {
 	const ingredients = req.body.ingredients.split(",").join("|");
 	const salePrice = req.body.sale_price;
 	const productCost = req.body.product_cost;
+	const location = req.body.shelf;
+	const quantity = req.body.quantity;
+	// const bakeDate = getCurrentDate();
+	// const expiryDate = addDays(shelfLife);
+
+	const body = {
+		quantity: quantity,
+		shelf: location,
+	}
 
 	product
 		.create({
@@ -43,12 +52,12 @@ exports.postNewProduct = (req, res, next) => {
 			product_cost: productCost
 		})
 		.then((prod) => {
-			product.sync()
+			axios.post(`${env.BASE_URL}/inventory/batch/${prod.product_id}`, body)
 				.then(result => {
-					res.redirect(`/inventory/${prod.dataValues.product_id}`);
+					res.redirect(`/inventory/${prod.product_id}`);
 				})
-				.catch(err => {
-					res.status(400).json({err});
+				.catch((err) => {
+					res.status(400).json({ err });
 				})
 		})
 		.catch((err) => {
@@ -58,7 +67,7 @@ exports.postNewProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
 
-	procedures.getProductData
+	sequelize.query('CALL getProductData')
 		.then(result => {
 			res.render("product/products", {
 				pageTitle: "Inventory",
@@ -104,11 +113,8 @@ exports.getUpdateProduct = (req, res, next) => {
 		.query('CALL getProductDataFromId(:param_id)',
     	{replacements: {param_id: id}})
 		.then(result => {
-			console.log(result);
-			const productData = result;
 			shelf.findAll()
 				.then(shelves => {
-					console.log(productData, shelves);
 					res.render('product/edit-product', {
 						pageTitle: result[0].product_name,
 						selected: 'inventory',
@@ -117,7 +123,6 @@ exports.getUpdateProduct = (req, res, next) => {
 					});
 				})
 				.catch(err => {
-					console.log("test");
 					res.status(400).json({err});
 				});
 		})
@@ -235,8 +240,18 @@ exports.getBatch = (req, res, next) => {
 	product
 		.findByPk(productId)
 		.then((product) => {
-			//update to send data to ejs file instead of json body response
-			res.json({ product: product.name, shelfLife: product.shelf_life });
+			shelf.findAll()
+				.then(shelves => {
+					res.render('product/new-batch', {
+						pageTitle: product.product_name,
+						selected: 'inventory',
+						product: product,
+						locations: shelves
+					});
+				})
+				.catch(err => {
+					res.status(400).json({err});
+				});
 		})
 		.catch((err) => {
 			res.status(400).json({ err });
@@ -245,34 +260,35 @@ exports.getBatch = (req, res, next) => {
 
 exports.postBatch = (req, res, next) => {
 	const productId = req.params.productId;
-	const shelfLife = req.body.shelf_life;
 	const quantity = req.body.quantity;
-	const location = req.body.shelf_id;
+	const location = req.body.shelf;
 	const bakeDate = getCurrentDate();
-	const expiryDate = addDays(shelfLife);
-
-	batch
-		.create({
-			shelfId: location,
-			bake_date: bakeDate,
-			expiry_date: expiryDate,
-		})
-		.then((batch) => {
-			inventory
+	
+	product.findByPk(productId)
+		.then(product => {
+			const expiryDate = addDays(product.shelf_life);
+			batch
 				.create({
+					batch_location: location,
+					bake_date: bakeDate,
+					expiry_date: expiryDate,
 					quantity: quantity,
-					batchId: batch.id,
-					productId: productId,
 				})
-				.then((result) => {
-					res.json({ batch, result });
+				.then((batch) => {
+					product.addBatch(batch)
+						.then(result => {
+							res.redirect("/inventory");
+						})
+						.catch(err => {
+					 		batch.destroy();
+							res.status(400).json({err});
+						});
 				})
 				.catch((err) => {
 					res.status(400).json({ err });
-					batch.destroy();
 				});
 		})
-		.catch((err) => {
-			res.status(400).json({ err });
+		.catch(err => {
+			res.status(400).json({err});
 		});
 };

@@ -42,11 +42,11 @@ inventory.batch.belongsTo(location.shelf, {foreignKey: 'batch_location'});
 
 inventory.batch.belongsToMany(inventory.product, {
 	through: inventory.inventory,
-	foreignKey: 'product_id'
+	foreignKey: 'batch_id'
 });
 inventory.product.belongsToMany(inventory.batch, {
 	through: inventory.inventory,
-	foreignKey: 'batch_id'
+	foreignKey: 'product_id'
 });
 
 location.location.hasMany(location.building, {foreignKey: 'location_id'});
