@@ -1,0 +1,46 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../partials/navbar/horizontal-nav.ejs') %>
+
+<div class="shop--container">
+  <div class="products">
+    <% products.forEach(product => { %>
+      <div class="product" 
+        data-id="<%= product.product_id %>"
+        data-salePrice="<%= product.sale_price %>"
+        data-quantity="0"
+        >
+        <img src="" alt="IMG" class="prod-img">
+        <span><%= product.product_name %></span>
+      </div>
+    <% }) %>
+  </div>
+  <div class="sale">
+    <div class="item-list"></div>
+    <div class="totals">
+      <div class="sub-total">
+        <span class="bold">Sub total: </span>
+        <span class="sub-total-amount"></span>
+      </div>
+      <div class="discount">
+        <span class="bold">Discount: </span>
+        <input type="number" max="1000" min="0" step="0.01" class="discount-amount" placeholder="0.00" value="0.00">
+        <button onclick="applyDiscount()">Apply</button>
+        <!-- <span class="discount-amount"></span> -->
+      </div>
+      <div class="tax">
+        <span class="bold">Tax: </span>
+        <span class="tax-amount"></span>
+      </div>
+      <div class="grand-total">
+        <span class="bold">Grand total: </span>
+        <span class="grand-total-amount"></span>
+      </div>
+    </div>
+    <div class="checkout">
+      <img src="images/icons/cart-shopping-solid.svg" alt="cart">
+      <span>Proceed To Payment Method</span>
+    </div>
+  </div>
+</div>
+<script src="js/main.js"></script>
+<%- include('../includes/foot.ejs') %>
