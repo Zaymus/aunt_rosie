@@ -320,20 +320,26 @@ h2 {
   width: 60%;
   height: 100%;
   overflow-y: scroll;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 25% 25% 25%;
+  grid-auto-rows: 25%;
+  row-gap: 30px;
+  column-gap: 60px;
+  justify-content: center;
+  align-items: center;
 }
 
 .products .product {
-  margin: 30px 60px;
-  width: 22.5%;
-  height: 22.5%;
+  width: 100%;
+  height: 100%;
   background-color: var(--clr-nav-btn);
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 60% 40%;
+  place-items: center;
+  /* justify-items: center;
+  align-items: center; */
   text-align: center;
 }
 
@@ -343,10 +349,14 @@ h2 {
 
 .prod-img {
   width: 35%;
-  height: 40%;
+  height: 65%;
   background-color: var(--clr-nav);
   border-radius: 10px;
   margin-bottom: 20px;
+}
+
+.product .prod-img {
+  margin: auto;
 }
 
 .shop--container .sale {
