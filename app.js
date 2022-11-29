@@ -7,12 +7,13 @@ const middleware = require("./middleware");
 const { env } = require("./util/constants");
 
 const app = express();
-const apiRouter = express.Router();
+const router = express.Router();
 
 const inventoryRouter = require("./routes/inventory");
 const staffRouter = require("./routes/staff");
 const shopRouter = require("./routes/shop");
 const serverRouter = require("./routes/server");
+const apiRouter = require("./routes/api");
 
 const {
 	inventory,
@@ -73,10 +74,11 @@ payments.financialTransaction.belongsTo(payments.payment);
 payments.financialTransaction.hasOne(payments.transactionType);
 payments.transactionType.belongsTo(payments.financialTransaction);
 
-apiRouter.use("/inventory", inventoryRouter);
-apiRouter.use("/staff", staffRouter);
-apiRouter.use(shopRouter);
-apiRouter.use("/server", serverRouter);
+router.use("/inventory", inventoryRouter);
+router.use("/staff", staffRouter);
+router.use(shopRouter);
+router.use("/server", serverRouter);
+router.use("/api", apiRouter);
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -85,7 +87,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 // app.use(middleware);
-app.use("/", apiRouter);
+app.use("/", router);
 app.use((req, res, next) => {
 	res.status(404).render("404", {
 		pageTitle: "Page Not Found",
