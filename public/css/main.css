@@ -325,7 +325,7 @@ h2 {
 }
 
 .products .product {
-  margin: 60px;
+  margin: 30px 60px;
   width: 22.5%;
   height: 22.5%;
   background-color: var(--clr-nav-btn);
@@ -356,7 +356,7 @@ h2 {
 }
 
 .sale .item-list {
-  height: 40vh;
+  height: 35vh;
   width: 90%;
   overflow-y: scroll;
   padding-right: 30px;
@@ -391,5 +391,44 @@ h2 {
 }
 
 .item .remove-item:hover {
+  cursor: pointer;
+}
+
+.totals {
+  width: 85%;
+  height: 20vh;
+  margin-top: 15px;
+  padding: 30px;
+  border-radius: 15px;
+  background-color: var(--clr-nav-btn);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.totals>div,
+.checkout {
+  font-size: 18pt;
+}
+
+.checkout {
+  width: calc(85% + 50px);
+  height: 10vh;
+  margin-top: 15px;
+  padding: 5px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--clr-nav-selected);
+}
+
+.checkout img {
+  height: 80%;
+  width: auto;
+  margin-right: 5%;
+}
+
+.checkout:hover {
   cursor: pointer;
 }

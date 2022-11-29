@@ -23,7 +23,9 @@
       </div>
       <div class="discount">
         <span class="bold">Discount: </span>
-        <span class="discount-amount"></span>
+        <input type="number" max="1000" min="0" step="0.01" class="discount-amount" placeholder="0.00" value="0.00">
+        <button onclick="applyDiscount()">Apply</button>
+        <!-- <span class="discount-amount"></span> -->
       </div>
       <div class="tax">
         <span class="bold">Tax: </span>
@@ -35,7 +37,7 @@
       </div>
     </div>
     <div class="checkout">
-      <!-- <img src="images/icons/cart-shopping-solid.svg" alt="cart"> -->
+      <img src="images/icons/cart-shopping-solid.svg" alt="cart">
       <span>Proceed To Payment Method</span>
     </div>
   </div>

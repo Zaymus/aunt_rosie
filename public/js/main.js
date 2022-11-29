@@ -1,6 +1,10 @@
 const products = document.querySelectorAll(".product");
 const productList = document.querySelector(".item-list");
 
+var discountAmount = 0.00;
+
+var prev = 0.00;
+
 const removeItem_onClick = (remove) => {
   const id = parseInt(remove.target.getAttribute("id"));
   const prod = document.querySelector(`.product[data-id='${id}']`)
@@ -97,25 +101,43 @@ const updateTotals = () => {
   const grandTotal = document.querySelector(".grand-total-amount");
 
   const items = document.querySelectorAll(".item");
-  var total = parseFloat("0.00");
+  var subtotal = parseFloat("0.00");
 
   items.forEach(item => {
     let product = document.querySelector(`.product[data-id='${item.id}']`);
     let price = parseFloat(product.getAttribute("data-saleprice"));
-    total += (price * product.getAttribute("data-quantity"));
+    subtotal += (price * product.getAttribute("data-quantity"));
   });
 
   var taxAmount = parseFloat("0.00");
 
-  taxAmount = total * 0.13;
+  taxAmount = subtotal * 0.13;
 
   var grandTotalAmount = parseFloat("0.00");
-
-  grandTotalAmount = total + taxAmount;
+  grandTotalAmount = (subtotal + taxAmount) - discountAmount;
+  if (grandTotalAmount < 0) {
+    grandTotalAmount = 0;
+  }
   
-  subTotal.innerHTML = formatter.format(total);
+  subTotal.innerHTML = formatter.format(subtotal);
   tax.innerHTML = formatter.format(taxAmount);
   grandTotal.innerHTML = formatter.format(grandTotalAmount);
+}
+
+const applyDiscount = () => {
+  discountAmount = parseFloat(document.querySelector(".discount-amount").value);
+  let grandTotal = document.querySelector(".grand-total-amount");
+  let totalAmount = parseFloat(grandTotal.innerHTML.slice(1, grandTotal.innerHTML.length-1));
+
+  if (discountAmount != prev) {
+    let amount = totalAmount - discountAmount
+
+    if (amount < 0) {
+      amount = 0;
+    }
+    prev = discountAmount;
+    grandTotal.innerHTML = formatter.format(amount);
+  }
 }
 
 products.forEach(product => {
