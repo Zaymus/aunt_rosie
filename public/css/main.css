@@ -416,8 +416,7 @@ h2 {
   justify-content: space-evenly;
 }
 
-.totals>div,
-.checkout {
+.totals>div {
   font-size: 18pt;
 }
 
@@ -430,6 +429,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 32pt;
   background-color: var(--clr-nav-selected);
 }
 
