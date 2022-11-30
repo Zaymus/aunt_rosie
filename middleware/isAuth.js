@@ -1,7 +1,7 @@
 const isAuth = (req, res, next) => {
-  console.log(req.cookies.authId);
   const authorized = req.query.authorized;
-  if (authorized || req.cookies.authId) {
+  console.log(req.cookies.isAuthorized);
+  if (authorized || req.cookies.isAuthorized) {
     return next();
   } else {
     res.render("auth/auth", {

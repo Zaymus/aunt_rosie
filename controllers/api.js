@@ -23,7 +23,9 @@ exports.postAuth = (req, res, next) => {
 	staff.findByPk(id)
 		.then(employee => {
 			if(isAdmin(employee.emp_type)) {
-				res.cookie('authId', id, {expire: Date.now() + cookieTimeout15M})
+				const expDate = new Date();
+				expDate.setTime(expDate.getTime() + cookieTimeout15M);
+				res.cookie('isAuthorized', true, {expires: expDate})
 				res.redirect(`${returnUri}?authorized=${true}`);
 			}
 			else {

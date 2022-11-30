@@ -9,7 +9,7 @@ const isAdmin = (emp_type) => {
 	return false;
 }
 
-const cookieTimeout15M = 900;
+const cookieTimeout15M = 900000;
 
 SERVER_STATUS = {
 	UP: "up",
