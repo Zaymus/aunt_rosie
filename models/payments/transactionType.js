@@ -4,7 +4,7 @@ const sequelize = require("../../util/database");
 const transactionType = sequelize.define(
 	"transaction_type",
 	{
-		id: {
+		type_id: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			allowNull: false,

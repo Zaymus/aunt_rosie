@@ -4,7 +4,7 @@ const sequelize = require("../../util/database");
 const staff = sequelize.define(
 	"staff",
 	{
-		id: {
+		staff_id: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			allowNull: false,

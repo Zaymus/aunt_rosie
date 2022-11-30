@@ -4,7 +4,7 @@ const sequelize = require("../../util/database");
 const transaction = sequelize.define(
 	"transaction",
 	{
-		id: {
+		trans_id: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			allowNull: false,

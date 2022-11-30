@@ -4,7 +4,7 @@ const sequelize = require("../../util/database");
 const hourlyRate = sequelize.define(
 	"hourly_rate",
 	{
-		id: {
+		rate_id: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			allowNull: false,

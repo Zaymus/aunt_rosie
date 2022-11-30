@@ -4,7 +4,7 @@ const sequelize = require("../../util/database");
 const payment = sequelize.define(
 	"payment",
 	{
-		id: {
+		payment_id: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			allowNull: false,
