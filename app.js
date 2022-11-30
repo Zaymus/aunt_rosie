@@ -2,8 +2,8 @@ const path = require("path");
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const sequelize = require("./util/database");
-const middleware = require("./middleware");
 const { env } = require("./util/constants");
 
 const app = express();
@@ -29,11 +29,14 @@ personnel.staff.belongsTo(personnel.hourlyRate, {foreignKey: 'rate_id'});
 personnel.staff.hasMany(invoice.invoice, {foreignKey: 'staff_id'});
 invoice.invoice.belongsTo(personnel.staff, {foreignKey: 'staff_id'});
 
+payments.transactionType.hasMany(invoice.invoice, {foreignKey: 'type_id'});
+invoice.invoice.belongsTo(payments.transactionType, {foreignKey: 'type_id'});
+
 invoice.invoice.hasMany(invoice.invoiceItem);
 invoice.invoiceItem.belongsTo(invoice.invoice);
 
-payments.transaction.hasMany(invoice.invoiceItem);
-invoice.invoiceItem.belongsTo(payments.transaction);
+personnel.staff.hasMany(invoice.invoice, {foreignKey: 'staff_id'});
+invoice.invoice.belongsTo(personnel.staff, {foreignKey: 'staff_id'});
 
 inventory.inventory.hasMany(payments.transaction, {foreignKey: 'inventory_id'});
 payments.transaction.belongsTo(inventory.inventory, {foreignKey: 'inventory_id'});
@@ -85,8 +88,8 @@ app.set("views", "views");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-// app.use(middleware);
 app.use("/", router);
 app.use((req, res, next) => {
 	res.status(404).render("404", {
