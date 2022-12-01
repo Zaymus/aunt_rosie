@@ -30,6 +30,10 @@ const product = sequelize.define(
 			type: Sequelize.DECIMAL(10, 2),
 			allowNull: false,
 		},
+		imageUrl: {
+			type: Sequelize.STRING,
+			allowNull: true,
+		}
 	},
 	{ 
 		timestamps: false,

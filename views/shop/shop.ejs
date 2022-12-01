@@ -8,8 +8,9 @@
         data-id="<%= product.product_id %>"
         data-salePrice="<%= product.sale_price %>"
         data-quantity="0"
+        data-imageUrl="<%= product.imageUrl %>"
         >
-        <img src="" alt="IMG" class="prod-img">
+        <img src="<%= product.imageUrl %>" alt="IMG" class="prod-img">
         <span><%= product.product_name %></span>
       </div>
     <% }) %>

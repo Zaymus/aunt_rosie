@@ -4,7 +4,7 @@ const sequelize = require("../../util/database");
 const invoice = sequelize.define(
 	"invoice",
 	{
-		id: {
+		invoice_id: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			allowNull: false,
@@ -12,6 +12,10 @@ const invoice = sequelize.define(
 		},
 		date: {
 			type: Sequelize.DATE,
+			allowNull: false,
+		},
+		amount: {
+			type: Sequelize.DECIMAL,
 			allowNull: false,
 		},
 		paid: {

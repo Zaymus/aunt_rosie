@@ -3,8 +3,9 @@
 
 <div class="data">
   <h1 class="title"><%= product.product_name %></h1>
-  <form action="/inventory/<%= product.product_id %>/edit" method="post">
+  <form action="/inventory/<%= product.product_id %>/edit" method="post" enctype="multipart/form-data">
   <h2>Details</h2>
+  <input type="file" name="image">
   <div class="details-info">
     <div class="edit-ingredients">
       <span class="bold">Ingredients:</span>

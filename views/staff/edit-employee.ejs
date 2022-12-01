@@ -4,7 +4,7 @@
 <div class="employee-data">
   <h1 class="title"><%= employee.dataValues.name %></h1>
 
-  <form action="/staff/<%= employee.dataValues.id %>/edit" method="post">
+  <form action="/staff/<%= employee.dataValues.staff_id %>/edit" method="post">
   <h2>Contact</h2>
   <div class="contact-info">
     <span><span class="bold">Phone Number:</span> <input type="tel" class="frm-input" id="phone_number" name="phone_number" value="<%= employee.dataValues.phone_number %>" placeholder="111-222-3334" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required></span>

@@ -1,0 +1,32 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../partials/navbar/vertical-nav.ejs') %>
+
+<div class="auth--container">
+  <div class="auth">
+    <div class="img--container">
+      <img src="/images/icons/triangle-exclamation-solid.svg">
+    </div>
+    <h1>Action Needed</h1>
+    <p>Please enter an Admin authorization code to proceed.</p>
+    <form action="/api/auth" method="post">
+      <div class="input--container">
+        <input type="hidden" name="returnUri" value="<%= returnUri %>">
+        <input type="number" min="1000" step="1" name="staffId" placeholder="Enter Authorization Code" required>
+        <div class="auth-btn flex center" onclick="javascript:this.parentNode.parentNode.submit();">
+          <img src="/images/icons/arrow-right-solid.svg">
+        </div>
+      </div>
+    </form>
+    <% if (errorMsg) { %>
+      <p class="error"><%= errorMsg %></p>
+    <% } %>
+  </div>
+</div>
+<%- include('../includes/foot.ejs') %>
+
+
+<!-- <form action="/api/auth" method="post">
+  <input type="hidden" name="returnUri" value="<%= returnUri %>">
+  <input type="number" name="staffId" placeholder="admin Id">
+  <button type="submit">Submit</button>
+</form> -->
