@@ -61,6 +61,7 @@ const product_onClick = (product) => {
       item.setAttribute("id", prod.dataset.id);
 
       image.setAttribute("alt", "IMG");
+      image.setAttribute("src", prod.dataset.imageurl);
       image.classList.add("prod-img");
 
       name.innerHTML = data.product_name;

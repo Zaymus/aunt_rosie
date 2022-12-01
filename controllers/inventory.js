@@ -10,7 +10,7 @@ const {
 } = require("../models/location");
 const { getCurrentDate, addDays } = require("../util/date");
 const sequelize = require("../util/database");
-const { env } = require("../util/constants");
+const { env, imageFolder } = require("../util/constants");
 const axios = require("axios");
 
 exports.getNewProduct = (req, res, next) => {
@@ -35,8 +35,6 @@ exports.postNewProduct = (req, res, next) => {
 	const productCost = req.body.product_cost;
 	const location = req.body.shelf;
 	const quantity = req.body.quantity;
-	// const bakeDate = getCurrentDate();
-	// const expiryDate = addDays(shelfLife);
 
 	const body = {
 		quantity: quantity,
@@ -96,14 +94,6 @@ exports.getProductById = (req, res, next) => {
 		.catch(err => {
 			res.status(400).json({err});
 		})
-	// product
-	// 	.findByPk(id)
-	// 	.then((product) => {
-	// 		res.json({ product });
-	// 	})
-	// 	.catch((err) => {
-	// 		res.status(400).json({ err });
-	// 	});
 };
 
 exports.getUpdateProduct = (req, res, next) => {
@@ -141,6 +131,7 @@ exports.postUpdateProduct = (req, res, next) => {
 			
 			axios.patch(`${env.BASE_URL}/inventory/${id}`, {
 				product_name: productData.product_name,
+				imageUrl: imageFolder + req.file?.originalname,
 				...productData
 			})
 			.then((result) => {
@@ -159,22 +150,18 @@ exports.postUpdateProduct = (req, res, next) => {
 									});
 							})
 							.catch(err => {
-								console.log(4);
 								res.status(400).json({err});
 							});
 					})
 					.catch(err => {
-						console.log(3);
 						res.status(400).json({err});
 					});
 			})
 			.catch((err) => {
-				console.log(2);
 				res.status(400).json({err});
 			});
 		})
 		.catch((err) => {
-			console.log(1);
 			res.status(400).json({err})
 	});
 }
@@ -187,18 +174,25 @@ exports.patchUpdateProduct = (req, res, next) => {
 	const salePrice = req.body.sale_price;
 	const productCost = req.body.product_cost;
 	const storageType = req.body.storage_type;
+	const imageUrl = req.body.imageUrl;
+
+	const updatedData = {
+		name: name,
+		shelf_life: shelfLife,
+		ingredients: ingredients,
+		sale_price: salePrice,
+		product_cost: productCost,
+		storage_type: storageType,
+	}
+
+	if (!imageUrl.includes('undefined')) {
+		updatedData.imageUrl = imageUrl;
+	}
 
 	product
 		.findByPk(id)
 		.then((product) => {
-			product.set({
-				name: name,
-				shelf_life: shelfLife,
-				ingredients: ingredients,
-				sale_price: salePrice,
-				product_cost: productCost,
-				storage_type: storageType,
-			});
+			product.set({...updatedData});
 
 			product
 				.save()

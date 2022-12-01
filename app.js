@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const sequelize = require("./util/database");
-const { env } = require("./util/constants");
+const { env, imageUpload } = require("./util/constants");
 
 const app = express();
 const router = express.Router();
@@ -89,6 +89,7 @@ app.set("views", "views");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(imageUpload);
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", router);
 app.use((req, res, next) => {
