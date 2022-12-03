@@ -532,3 +532,7 @@ input[type=number] {
   height: 80%;
   width: auto;
 }
+
+.prod-image {
+  margin: 15px 0px 30px;
+}

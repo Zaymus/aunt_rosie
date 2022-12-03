@@ -5,7 +5,6 @@
   <h1 class="title"><%= product.product_name %></h1>
   <form action="/inventory/<%= product.product_id %>/edit" method="post" enctype="multipart/form-data">
   <h2>Details</h2>
-  <input type="file" name="image">
   <div class="details-info">
     <div class="edit-ingredients">
       <span class="bold">Ingredients:</span>
@@ -18,9 +17,9 @@
   <h2>Pricing</h2>
   <div class="details-info">
     <span><span class="bold">Product Cost: </span>
-    $<input type="number" min="0.01" max="1000" step="0.01" name="product_cost" value="<%= product.product_cost %>" placeholder="5.99" required />
+    $<input type="number" min="0.01" max="1000" step="0.01" name="product_cost" value="<%= product.product_cost %>" placeholder="2.50" required />
     </span>
-    <span><span class="bold">Sale Price: </span>$<input type="number" min="0.01" max="1000" step="0.01" name="sale_price" value="<%= product.sale_price %>" placeholder="2.50" required /></span>
+    <span><span class="bold">Sale Price: </span>$<input type="number" min="0.01" max="1000" step="0.01" name="sale_price" value="<%= product.sale_price %>" placeholder="5.99" required /></span>
   </div>
 
   <h2>Location</h2>
@@ -34,8 +33,12 @@
     </select>
   </div>
 
-  <button type="submit">Save Changes</button>
+  <h2>Product Image</h2>
+  <div class="prod-image">
+    <input type="file" name="image">
+  </div>
 
+  <button type="submit">Save Changes</button>
   </form>
 </div>
 
