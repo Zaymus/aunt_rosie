@@ -1,0 +1,7 @@
+DB_NAME="aunt_rosie"
+DB_USER="root"
+DB_PASSWORD="mysql2022"
+DB_HOST="localhost"
+PORT=3000
+BASE_URL="http://localhost:3000"
+# COOKBOOK_API_URL="http://localhost:9001/api"
