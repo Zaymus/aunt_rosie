@@ -49,8 +49,13 @@
   </div>
 
   <form action="" method="post">
-    <input type="email" name="email" placeholder="Email Address" required>
-    <button type="submit">Send Invoice</button>
+    <div class="flex center">
+      <input type="email" name="email" placeholder="Email Address" autocomplete="off" required>
+      <div class="auth-btn flex center" style="margin-left:30px;"
+       onclick="this.parentNode.parentNode.submit();">
+        <img src="/images/icons/arrow-right-solid.svg">
+      </div>
+    </div>
   </form>
 </div>
 
