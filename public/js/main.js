@@ -2,8 +2,13 @@ const products = document.querySelectorAll(".product");
 const productList = document.querySelector(".item-list");
 
 var discountAmount = 0.00;
-
 var prev = 0.00;
+const totals = {
+  subtotal: 0,
+  discount: 0,
+  tax: 0,
+  grandtotal: 0,
+};
 
 const removeItem_onClick = (remove) => {
   const id = parseInt(remove.target.getAttribute("id"));
@@ -21,6 +26,29 @@ const removeItem_onClick = (remove) => {
   }
 
   updateTotals();
+}
+
+const updateCart = () => {
+  const items = document.querySelectorAll('.item');
+  const cartField = document.querySelector('input[name="cart"]');
+  const cart = [];
+  items.forEach((item) => {
+    const prodData = document.querySelector(`[data-id="${item.getAttribute("id")}"]`);
+    let id = item.id;
+    let name = item.childNodes[1].innerHTML;
+    let quantity = item.childNodes[2].innerHTML.split(" ")[1];
+    let price = prodData.dataset.saleprice;
+    let total = price * quantity;
+    let cartItem = {
+      id: id,
+      name: name,
+      quantity: quantity,
+      price: price,
+      total: total,
+    };
+    cart.push(cartItem);
+  });
+  cartField.setAttribute("value", JSON.stringify({cart: cart, totals: totals}));
 }
 
 const product_onClick = (product) => {
@@ -123,6 +151,13 @@ const updateTotals = () => {
   subTotal.innerHTML = formatter.format(subtotal);
   tax.innerHTML = formatter.format(taxAmount);
   grandTotal.innerHTML = formatter.format(grandTotalAmount);
+  
+  totals.subtotal = parseFloat(subtotal.toFixed(2));
+  totals.discount = parseFloat(discountAmount.toFixed(2));
+  totals.tax = parseFloat(taxAmount.toFixed(2));
+  totals.grandtotal = parseFloat(grandTotalAmount.toFixed(2));
+
+  updateCart();
 }
 
 const applyDiscount = () => {

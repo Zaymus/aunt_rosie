@@ -15,16 +15,16 @@ const invoice = sequelize.define(
 			allowNull: false,
 		},
 		amount: {
-			type: Sequelize.DECIMAL,
+			type: Sequelize.DECIMAL(10, 2),
 			allowNull: false,
 		},
-		paid: {
-			type: Sequelize.BOOLEAN,
-			allowNull: false,
+		discount: {
+			type: Sequelize.DECIMAL(10, 2),
 		},
 	},
 	{ 
 		timestamps: false,
+		initialAutoIncrement: 10000,
 		tableName: "invoice"
 	 }
 );

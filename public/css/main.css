@@ -350,8 +350,6 @@ input[type=number] {
   grid-template-columns: 100%;
   grid-template-rows: 60% 40%;
   place-items: center;
-  /* justify-items: center;
-  align-items: center; */
   text-align: center;
 }
 
@@ -535,4 +533,113 @@ input[type=number] {
 
 .prod-image {
   margin: 15px 0px 30px;
+}
+
+.reports--container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.reports--container h1 {
+  position: fixed;
+  top: 10px;
+  left: auto;
+  right: auto;
+}
+
+.report {
+  width: 20%;
+  height: 30%;
+  background-color: var(--clr-nav-btn);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 60% 40%;
+  place-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.report img {
+  width: 50%;
+  height: 75%;
+  border-radius: 15px;
+  background-color: var(--clr-nav);
+}
+
+.dashboard--container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard {
+  width: 95%;
+  height: 95%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+
+.low-quantity--preview {
+  grid-column: span 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.invoice--container {
+  width: 100%;
+  height: 80vh;
+  position: fixed;
+  top: 20vh;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px auto;
+  overflow-y: scroll;
+}
+
+.invoice--container form {
+  margin-bottom: 50px;
+}
+
+.invoice--header {
+  width: 60%;
+  height: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoice--header .logo {
+  height: 100%;
+}
+
+.invoice--header img {
+  height: 100%;
+}
+
+.invoice--body {
+  width: 60%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-auto-rows: 50px;
+  margin: 30px 0px;
+  text-align: center;
+}
+
+.invoice--body .heading {
+  font-size: 24pt;
+}
+
+.invoice--totals .totals {
+  background-color: var(--clr-bg);
 }
