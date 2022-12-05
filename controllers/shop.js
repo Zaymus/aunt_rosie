@@ -4,6 +4,7 @@ const product = require("../models/inventory/product");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const {env} = require("../util/constants");
+const sequelize = require("../util/database");
 
 var transporter = nodemailer.createTransport({
   host: "smtp.mailtrap.io",
@@ -38,10 +39,33 @@ const decrypt = hash => {
 
 
 exports.getIndex = (req, res, next) => {
-	res.render("index", {
-		pageTitle: "Dashboard",
-		selected: "none",
-	});
+	sequelize.query("CALL lowQuantityPreview(6);")
+		.then(result => {
+			return result;
+		})
+		.then(lowQty => {
+			sequelize.query("CALL soonToExpirePreview(500);")
+			.then(result => {
+				return {
+					quantity: lowQty,
+					expire: result,
+				};
+			})
+			.then(data => {
+				res.render("index", {
+					pageTitle: "Dashboard",
+					selected: "none",
+					lowQuantity: data.quantity,
+					expireSoon: data.expire,
+				});
+			})
+			.catch(err => {
+				res.status(400).json({err});
+			})
+		})
+		.catch(err => {
+			res.status(400).json({err});
+		});
 };
 
 exports.getShop = (req, res, next) => {

@@ -599,7 +599,7 @@ input[type=number] {
 .dash--preview .dash--data {
   width: 90%;
   height: 90%;
-  overflow-y: scroll;
+  text-align: center;
 }
 
 .low-quantity--preview {
@@ -610,6 +610,21 @@ input[type=number] {
 .expiring-soon--preview {
   grid-column: 1 / span 3;
   grid-row: 3 / span 2;
+}
+
+.low-quantity {
+  width: 90%;
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr;
+  grid-auto-rows: 1fr;
+}
+
+.expiring-soon {
+  width: 90%;
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr 1fr;
+  grid-auto-rows: 1fr;
+  row-gap: 15px;
 }
 
 .invoice--container {
@@ -679,4 +694,50 @@ input[type=number] {
 .invoice--container input:focus {
   outline: none;
   border-bottom: 2px solid var(--clr-accent);
+}
+
+.report--container {
+  width: calc(100% - 70px);
+  height: auto;
+  margin-left: 35px;
+}
+
+.report--container .dash--preview {
+  width: 100%;
+  margin-top: 25px;
+  height: 75vh;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.report--container form {
+  width: 100%;
+  margin-right: 20px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.report--container button {
+  margin-left: 20px;
+}
+
+.report--container label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.report--container .dash--data {
+  margin-top: 25px;
+  overflow-y: scroll;
+}
+
+.report--container .low-quantity {
+  grid-auto-rows: 30px;
+  row-gap: 15px;
+}
+
+.report--container .expiring-soon {
+  grid-auto-rows: 30px;
+  row-gap: 15px;
 }

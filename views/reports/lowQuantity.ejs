@@ -1,0 +1,24 @@
+<%- include('../partials/navbar/vertical-nav.ejs') %>
+<%- include('../includes/head.ejs') %>
+<div class="report--container">
+  <h1>Low Quantity Products</h1>
+  <div class="dash--preview">
+    <form action="" method="post">
+      <label for="quantity">Maximum Product Quantity:</label>
+      <input type="number" name="quantity" min="1" max="100" step="1" placeholder="Product Quantity" value="<%= qty %>" required>
+      <button type="submit">Search</button>
+    </form>
+      <div class="dash--data low-quantity">
+        <span class="bold">Product Name</span>
+        <span class="bold">Expiry Date</span>
+        <span class="bold">Quantity</span>
+        <% data.forEach(item => { %>
+          <span><%= item.product_name %></span>
+          <span><%= new Date(item.expiry_date).toDateString() %></span>
+          <span><%= item.quantity %></span>
+        <% }) %>
+      </div>
+  </div>
+</div>
+
+<%- include('../includes/foot.ejs') %>
