@@ -1,27 +1,20 @@
-<%- include('./includes/head.ejs') %>
-<%- include('./partials/navbar/vertical-nav.ejs') %>
+<%- include('../partials/navbar/vertical-nav.ejs') %>
+<%- include('../includes/head.ejs') %>
 
-<div class="dashboard--container">
-  <div class="dashboard">
-    <div class="low-quantity--preview dash--preview">
-      <div class="dash--data low-quantity">
-        <span class="bold">Product Name</span>
-        <span class="bold">Expiry Date</span>
-        <span class="bold">Quantity</span>
-        <% lowQuantity.forEach(item => { %>
-          <span><%= item.product_name %></span>
-          <span><%= new Date(item.expiry_date).toDateString() %></span>
-          <span><%= item.quantity %></span>
-        <% }) %>
-      </div>
-    </div>
-    <div class="expiring-soon--preview dash--preview">
+<div class="report--container">
+  <h1>Products to Expire Soon</h1>
+  <div class="dash--preview">
+    <form action="" method="post">
+      <label for="days">Days till expiry date:</label>
+      <input type="number" name="days" min="1" max="1000" step="1" placeholder="Days till expiration" value="<%= days %>" required>
+      <button type="submit">Search</button>
+    </form>
       <div class="dash--data expiring-soon">
         <span class="bold">Product Name</span>
         <span class="bold">Location</span>
         <span class="bold">Expiry Date</span>
         <span class="bold">Quantity</span>
-        <% expireSoon.forEach(item => { %>
+        <% data.forEach(item => { %>
           <span><%= item.product_name %></span>
           <span>
             <span><span class="bold">Floor:</span><%= `${item.floor_num}` %></span>
@@ -33,8 +26,7 @@
           <span><%= item.quantity %></span>
         <% }) %>
       </div>
-    </div>
   </div>
 </div>
 
-<%- include('./includes/foot.ejs') %>
+<%- include('../includes/foot.ejs') %>

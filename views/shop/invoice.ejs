@@ -1,0 +1,62 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../partials/navbar/horizontal-nav.ejs') %>
+
+<div class="invoice--container">
+  <div class="invoice--header">
+    <div class="invoice--info">
+      <h2>Invoice #<%= invoice.invoice_id %></h2>
+      <h3>Issued: <%= new Date(invoice.date).toDateString() %></h3>
+      <h3>Payment Type: Cash</h3>
+    </div>
+    <div class="logo">
+      <img src="/images/logo_svg.svg">
+    </div>
+  </div>
+
+  <div class="invoice--body">
+    <span class="bold heading">Product</span>
+    <span class="bold heading">Price</span>
+    <span class="bold heading">Quantity</span>
+    <span class="bold heading">Total</span>
+    <% cart.forEach(item => { %>
+      <% let name = item.name.replace(/&amp;/g , "&"); %>
+      <span><%= name %></span>
+      <span>$<%= parseFloat(item.price).toFixed(2) %></span>
+      <span><%= item.quantity %></span>
+      <span>$<%= item.total.toFixed(2) %></span>
+    <% }); %>
+  </div>
+
+  <div class="invoice--totals">
+    <div class="totals">
+      <div class="sub-total">
+        <span class="bold">Sub total: </span>
+        <span class="sub-total-amount"><%= parseFloat(totals.subtotal).toFixed(2) %></span>
+      </div>
+      <div class="discount">
+        <span class="bold">Discount: </span>
+        <span class="discount-amount"><%= parseFloat(totals.discount).toFixed(2) %></span>
+      </div>
+      <div class="tax">
+        <span class="bold">Tax: </span>
+        <span class="tax-amount"><%= parseFloat(totals.tax).toFixed(2) %></span>
+      </div>
+      <div class="grand-total">
+        <span class="bold">Grand total: </span>
+        <span class="grand-total-amount"><%= parseFloat(totals.grandtotal).toFixed(2) %></span>
+      </div>
+    </div>
+  </div>
+
+  <form action="" method="post">
+    <div class="flex center">
+      <input type="email" name="email" placeholder="Email Address" autocomplete="off" required>
+      <div class="auth-btn flex center" style="margin-left:30px;"
+       onclick="this.parentNode.parentNode.submit();">
+        <img src="/images/icons/arrow-right-solid.svg">
+      </div>
+    </div>
+  </form>
+</div>
+
+<%- include('../includes/foot.ejs') %>

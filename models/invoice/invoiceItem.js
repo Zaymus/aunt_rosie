@@ -10,9 +10,6 @@ const invoiceItem = sequelize.define(
 			allowNull: false,
 			primaryKey: true,
 		},
-		discount: {
-			type: Sequelize.DECIMAL(10, 2),
-		},
 	},
 	{ 
 		timestamps: false,

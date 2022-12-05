@@ -1,4 +1,3 @@
-const procedures = require("../util/procedures");
 const { product, batch, inventory } = require("../models/inventory");
 const {
 	location,

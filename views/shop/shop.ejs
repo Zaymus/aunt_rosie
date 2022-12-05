@@ -37,10 +37,13 @@
         <span class="grand-total-amount"></span>
       </div>
     </div>
-    <div class="checkout">
-      <img src="images/icons/cart-shopping-solid.svg" alt="cart">
-      <span>Proceed To Checkout</span>
-    </div>
+    <form action="/shop" method="post">
+      <input type="hidden" name="cart">
+      <div class="checkout" onclick="this.parentNode.submit()">
+        <img src="images/icons/cart-shopping-solid.svg" alt="cart">
+        <span>Proceed To Checkout</span>
+      </div>
+    </form>
   </div>
 </div>
 <script src="js/main.js"></script>

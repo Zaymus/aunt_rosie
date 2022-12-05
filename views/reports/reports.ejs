@@ -1,0 +1,16 @@
+<%- include('../partials/navbar/vertical-nav.ejs') %>
+<%- include('../includes/head.ejs') %>
+
+<div class="reports--container">
+  <h1>Reports</h1>
+  <div class="report" onclick="location.href='http://localhost:3000/reports/low-quantity'">
+    <img src="/images/icons/pallet-solid.svg" alt="icon">
+    <p>Products Low on Quantity</p>
+  </div>
+  <div class="report" onclick="location.href='http://localhost:3000/reports/expiring-soon'">
+    <img src="/images/icons/clock-regular.svg" alt="icon">
+    <p>Soon To Expire Products</p>
+  </div>
+</div>
+
+<%- include('../includes/foot.ejs') %>
