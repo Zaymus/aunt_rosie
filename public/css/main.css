@@ -572,7 +572,8 @@ input[type=number] {
 
 .dashboard--container {
   width: 100%;
-  height: auto;
+  height: calc(100% - 60px);
+  padding: 30px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -580,6 +581,7 @@ input[type=number] {
 
 .dashboard {
   width: 95%;
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 2fr;
